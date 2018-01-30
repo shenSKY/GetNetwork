@@ -22,6 +22,7 @@
     NSLog(@"3--%@", [NetworkInformation getNetworkTypeByReachability]);
     NSLog(@"4--%@", [NetworkInformation getNetworkType]);
     NSLog(@"5--%d", [NetworkInformation getWifiSignalStrength]);
+    NSLog(@"6--%@", [NetworkInformation getIPAddress]);
 }
 
 

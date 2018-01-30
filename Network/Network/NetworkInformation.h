@@ -21,4 +21,6 @@
 + (NSString *)getWifiBSSID;
 //获取Wifi信号强度
 + (int)getWifiSignalStrength;
+//获取设备IP地址
++ (NSString *)getIPAddress;
 @end

@@ -12,9 +12,11 @@
 #import "Reachability.h"
 #import <ifaddrs.h>
 #import <arpa/inet.h>
-#define KIsiPhoneX ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125, 2436), [[UIScreen mainScreen] currentMode].size) : NO)
 
 @implementation NetworkInformation
+
+//刘海屏safeAreaInset的高度(所有的刘海屏都一致)
+static const CGFloat liuHaiHeight = 44;
 
 #pragma mark 获取当前网络类型
 + (NSString *)getNetworkType
@@ -23,8 +25,8 @@
     id statusBar = [app valueForKeyPath:@"statusBar"];
     NSString *network = @"";
     
-    if (KIsiPhoneX) {
-//        iPhone X
+    if ([[[self alloc]init]isLiuHaiScreen]) {
+//        刘海屏
         id statusBarView = [statusBar valueForKeyPath:@"statusBar"];
         UIView *foregroundView = [statusBarView valueForKeyPath:@"foregroundView"];
         
@@ -38,7 +40,7 @@
             }
         }
     }else {
-//        非 iPhone X
+//        非刘海屏
         UIView *foregroundView = [statusBar valueForKeyPath:@"foregroundView"];
         NSArray *subviews = [foregroundView subviews];
         
@@ -126,8 +128,8 @@
     if ([[self getNetworkType]isEqualToString:@"WIFI"]) {
         UIApplication *app = [UIApplication sharedApplication];
         id statusBar = [app valueForKey:@"statusBar"];
-        if (KIsiPhoneX) {
-//            iPhone X
+        if ([[[self alloc]init]isLiuHaiScreen]) {
+//            刘海屏
             id statusBarView = [statusBar valueForKeyPath:@"statusBar"];
             UIView *foregroundView = [statusBarView valueForKeyPath:@"foregroundView"];
             NSArray *subviews = [[foregroundView subviews][2] subviews];
@@ -138,7 +140,7 @@
                 }
             }
         }else {
-//            非 iPhone X
+//            非刘海屏
             UIView *foregroundView = [statusBar valueForKey:@"foregroundView"];
             
             NSArray *subviews = [foregroundView subviews];
@@ -189,5 +191,18 @@
     // 释放内存
     freeifaddrs(interfaces);
     return address;
+}
+
+#pragma mark 判断是否是刘海屏
+- (BOOL)isLiuHaiScreen
+{
+    if (@available(iOS 11.0, *)) {
+    
+        UIEdgeInsets safeAreaInsets = [UIApplication sharedApplication].windows[0].safeAreaInsets;
+        
+        return safeAreaInsets.top == liuHaiHeight || safeAreaInsets.bottom == liuHaiHeight || safeAreaInsets.left == liuHaiHeight || safeAreaInsets.right == liuHaiHeight;
+    }else {
+        return false;
+    }
 }
 @end

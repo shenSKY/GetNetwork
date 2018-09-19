@@ -75,6 +75,7 @@ static const CGFloat liuHaiHeight = 44;
     }
     return network;
 }
+
 + (NSString *)getNetworkTypeByReachability
 {
     NSString *network = @"";
@@ -96,6 +97,7 @@ static const CGFloat liuHaiHeight = 44;
     }
     return network;
 }
+
 #pragma mark 获取Wifi信息
 + (id)fetchSSIDInfo
 {
@@ -110,18 +112,22 @@ static const CGFloat liuHaiHeight = 44;
     }
     return info;
 }
+
 #pragma mark 获取WIFI名字
 + (NSString *)getWifiSSID
 {
     return (NSString *)[self fetchSSIDInfo][@"SSID"];
 }
+
 #pragma mark 获取WIFI的MAC地址
 + (NSString *)getWifiBSSID
 {
     return (NSString *)[self fetchSSIDInfo][@"BSSID"];
 }
+
 #pragma mark 获取Wifi信号强度
-+ (int)getWifiSignalStrength{
++ (int)getWifiSignalStrength
+{
     
     int signalStrength = 0;
 //    判断类型是否为WIFI
@@ -160,6 +166,7 @@ static const CGFloat liuHaiHeight = 44;
     }
     return signalStrength;
 }
+
 #pragma mark 获取设备IP地址
 + (NSString *)getIPAddress
 {

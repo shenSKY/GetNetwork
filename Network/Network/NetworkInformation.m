@@ -29,16 +29,58 @@ static const CGFloat liuHaiHeight = 44;
 //        刘海屏
         id statusBarView = [statusBar valueForKeyPath:@"statusBar"];
         UIView *foregroundView = [statusBarView valueForKeyPath:@"foregroundView"];
-        
         NSArray *subviews = [[foregroundView subviews][2] subviews];
         
-        for (id subview in subviews) {
-            if ([subview isKindOfClass:NSClassFromString(@"_UIStatusBarWifiSignalView")]) {
+        if (subviews.count == 0) {
+//            iOS 12
+            id currentData = [statusBarView valueForKeyPath:@"currentData"];
+            id wifiEntry = [currentData valueForKey:@"wifiEntry"];
+            if ([[wifiEntry valueForKey:@"_enabled"] boolValue]) {
                 network = @"WIFI";
-            }else if ([subview isKindOfClass:NSClassFromString(@"_UIStatusBarStringView")]) {
-                network = [subview valueForKeyPath:@"originalText"];
+            }else {
+//                卡1:
+                id cellularEntry = [currentData valueForKey:@"cellularEntry"];
+//                卡2:
+                id secondaryCellularEntry = [currentData valueForKey:@"secondaryCellularEntry"];
+
+                if (([[cellularEntry valueForKey:@"_enabled"] boolValue]|[[secondaryCellularEntry valueForKey:@"_enabled"] boolValue]) == NO) {
+//                    无卡情况
+                    network = @"NONE";
+                }else {
+//                    判断卡1还是卡2
+                    BOOL isCardOne = [[cellularEntry valueForKey:@"_enabled"] boolValue];
+                    int networkType = isCardOne ? [[cellularEntry valueForKey:@"type"] intValue] : [[secondaryCellularEntry valueForKey:@"type"] intValue];
+                    switch (networkType) {
+                            case 0://无服务
+                            network = [NSString stringWithFormat:@"%@-%@", isCardOne ? @"Card 1" : @"Card 2", @"NONE"];
+                            break;
+                            case 3:
+                            network = [NSString stringWithFormat:@"%@-%@", isCardOne ? @"Card 1" : @"Card 2", @"2G/E"];
+                            break;
+                            case 4:
+                            network = [NSString stringWithFormat:@"%@-%@", isCardOne ? @"Card 1" : @"Card 2", @"3G"];
+                            break;
+                            case 5:
+                            network = [NSString stringWithFormat:@"%@-%@", isCardOne ? @"Card 1" : @"Card 2", @"4G"];
+                            break;
+                        default:
+                            break;
+                    }
+                    
+                }
+            }
+        
+        }else {
+            
+            for (id subview in subviews) {
+                if ([subview isKindOfClass:NSClassFromString(@"_UIStatusBarWifiSignalView")]) {
+                    network = @"WIFI";
+                }else if ([subview isKindOfClass:NSClassFromString(@"_UIStatusBarStringView")]) {
+                    network = [subview valueForKeyPath:@"originalText"];
+                }
             }
         }
+        
     }else {
 //        非刘海屏
         UIView *foregroundView = [statusBar valueForKeyPath:@"foregroundView"];
@@ -140,9 +182,19 @@ static const CGFloat liuHaiHeight = 44;
             UIView *foregroundView = [statusBarView valueForKeyPath:@"foregroundView"];
             NSArray *subviews = [[foregroundView subviews][2] subviews];
             
-            for (id subview in subviews) {
-                if ([subview isKindOfClass:NSClassFromString(@"_UIStatusBarWifiSignalView")]) {
-                    signalStrength = [[subview valueForKey:@"_numberOfActiveBars"] intValue];
+            if (subviews.count == 0) {
+//                iOS 12
+                id currentData = [statusBarView valueForKeyPath:@"currentData"];
+                id wifiEntry = [currentData valueForKey:@"wifiEntry"];
+                signalStrength = [[wifiEntry valueForKey:@"displayValue"] intValue];
+//                dBm
+//                int rawValue = [[wifiEntry valueForKey:@"rawValue"] intValue];
+            }else {
+                
+                for (id subview in subviews) {
+                    if ([subview isKindOfClass:NSClassFromString(@"_UIStatusBarWifiSignalView")]) {
+                        signalStrength = [[subview valueForKey:@"_numberOfActiveBars"] intValue];
+                    }
                 }
             }
         }else {

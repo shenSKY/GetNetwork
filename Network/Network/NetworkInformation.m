@@ -261,7 +261,7 @@ static const CGFloat liuHaiHeight = 44;
         
         return safeAreaInsets.top == liuHaiHeight || safeAreaInsets.bottom == liuHaiHeight || safeAreaInsets.left == liuHaiHeight || safeAreaInsets.right == liuHaiHeight;
     }else {
-        return false;
+        return NO;
     }
 }
 @end

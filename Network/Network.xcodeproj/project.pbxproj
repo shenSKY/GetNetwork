@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		57486C77233875700024C2A6 /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57486C76233875700024C2A6 /* ExternalAccessory.framework */; };
 		5794A7A52017017E00F4808D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5794A7A42017017E00F4808D /* AppDelegate.m */; };
 		5794A7A82017017E00F4808D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5794A7A72017017E00F4808D /* ViewController.m */; };
 		5794A7AB2017017E00F4808D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5794A7A92017017E00F4808D /* Main.storyboard */; };
@@ -18,6 +19,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		57486C74233875700024C2A6 /* Network.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Network.entitlements; sourceTree = "<group>"; };
+		57486C76233875700024C2A6 /* ExternalAccessory.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExternalAccessory.framework; path = System/Library/Frameworks/ExternalAccessory.framework; sourceTree = SDKROOT; };
 		5794A7A02017017E00F4808D /* Network.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Network.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5794A7A32017017E00F4808D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		5794A7A42017017E00F4808D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -39,17 +42,27 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				57486C77233875700024C2A6 /* ExternalAccessory.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		57486C75233875700024C2A6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				57486C76233875700024C2A6 /* ExternalAccessory.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		5794A7972017017E00F4808D = {
 			isa = PBXGroup;
 			children = (
 				5794A7A22017017E00F4808D /* Network */,
 				5794A7A12017017E00F4808D /* Products */,
+				57486C75233875700024C2A6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -64,6 +77,7 @@
 		5794A7A22017017E00F4808D /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				57486C74233875700024C2A6 /* Network.entitlements */,
 				5794A7A32017017E00F4808D /* AppDelegate.h */,
 				5794A7A42017017E00F4808D /* AppDelegate.m */,
 				5794A7A62017017E00F4808D /* ViewController.h */,
@@ -107,7 +121,7 @@
 		5794A7982017017E00F4808D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0920;
+				LastUpgradeCheck = 1100;
 				ORGANIZATIONNAME = Ssky;
 				TargetAttributes = {
 					5794A79F2017017E00F4808D = {
@@ -196,6 +210,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -203,6 +218,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -251,6 +267,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -258,6 +275,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -290,12 +308,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Network/Network.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = WBP7V96R26;
+				DEVELOPMENT_TEAM = X85Z42JGXF;
 				INFOPLIST_FILE = Network/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = person.Network;
+				PRODUCT_BUNDLE_IDENTIFIER = tv.higlobal.colombia;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -305,12 +324,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Network/Network.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = WBP7V96R26;
+				DEVELOPMENT_TEAM = X85Z42JGXF;
 				INFOPLIST_FILE = Network/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = person.Network;
+				PRODUCT_BUNDLE_IDENTIFIER = tv.higlobal.colombia;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

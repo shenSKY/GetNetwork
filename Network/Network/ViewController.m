@@ -19,13 +19,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    NSString* phoneVersion = [[UIDevice currentDevice] systemVersion];
-    CGFloat version = [phoneVersion floatValue];
-        // 如果是iOS13 未开启地理位置权限 需要提示一下
-    if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusNotDetermined && version >= 13) {
-        self.locationManager = [[CLLocationManager alloc] init];
-        [self.locationManager requestWhenInUseAuthorization];
-    }
+    
+    if (@available(iOS 13.0, *)) {
+//        如果是iOS13 未开启地理位置权限 需要提示一下
+           if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusNotDetermined) {
+               self.locationManager = [[CLLocationManager alloc] init];
+               [self.locationManager requestWhenInUseAuthorization];
+           }
+       }
 }
 
 - (IBAction)action:(UIButton *)sender {

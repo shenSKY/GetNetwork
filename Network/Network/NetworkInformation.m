@@ -168,6 +168,7 @@ static const CGFloat liuHaiHeight = 44;
     return network;
 }
 
+#pragma mark 获取当前网络类型(通过Reachability)
 + (NSString *)getNetworkTypeByReachability
 {
     NSString *network = @"";
@@ -207,7 +208,7 @@ static const CGFloat liuHaiHeight = 44;
 
 #pragma mark 获取WIFI名字
 + (NSString *)getWifiSSID
-{  
+{
     return (NSString *)[self fetchSSIDInfo][@"SSID"];
 }
 
